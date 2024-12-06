@@ -7,7 +7,7 @@ state={
 }
 
     fetchUsers = () => {
-        fetch(`api.openweathermap.org/data/2.5/weather?q={cityname}&appid={5fb43d9317a963bf83907952a8a8a3f3}`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=milano&appid=5fb43d9317a963bf83907952a8a8a3f3`)
             .then((resp) => {
                 if (resp.ok) {
                     return resp.json();
@@ -17,9 +17,7 @@ state={
             })
             .then((data) => {
                 console.log("JSON RESPONSE", data);
-                this.state({
-                    meteo: data,
-                })
+                this.state({meteo: data})
             })
             .catch((e) => {
                 console.log("Error!", e);
@@ -36,13 +34,11 @@ state={
             <div>
                 <h1>Meteo</h1>
                 <ListGroup>
-                    {/* {weatherData && (
-                        <ListGroup.Item>
-                            <h5>{weatherData.name}</h5>
-                            <p>Temperature: {Math.round(weatherData.main.temp - 273.15)}°C</p>
-                            <p>Weather: {weatherData.weather[0].description}</p>
-                        </ListGroup.Item>
-                    )} */}
+                    <ListGroup.Item>
+                            <h5>{meteo.name}</h5>
+                            <p>Temperature: {Math.round(meteo.list[0].main.temp)}°C</p>
+                            <p>Weather: {meteo.list[0].weather[0].description}</p>
+                    </ListGroup.Item>
                 </ListGroup>
             </div>
         );
